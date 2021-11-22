@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+ name: vpcingressresource
+ namespace: doosra-vpc
+spec:
+ tls:
+ - hosts:
+   - draas.wanclouds.net
+   secretName: ingress-tls
+ rules:
+ - host: draas.wanclouds.net
+   http:
+     paths:
+     - path: /v1/users
+       pathType: Prefix
+       backend:
+         service: 
+           name: auth-svc
+           port: 
+             number: 8081
